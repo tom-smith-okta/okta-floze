@@ -1,0 +1,11 @@
+{
+	"inline_hook": {
+		"client_id": "0oays0rfpmeuVIf1f0h7",
+		"default_user": "geena.davis",
+		"desc": "use an inline hook to add claims to the id token and access token",
+		"notes": "hook points to https://okta-webhooks.herokuapp.com/",
+		"okta_base_url": "https://microdemos.oktapreview.com",
+        "okta_widget": true,
+        "title": "inline hook add claims"
+	}
+}

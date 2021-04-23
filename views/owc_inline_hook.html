@@ -1,0 +1,24 @@
+
+<script>
+
+window.onload = function() {
+    var signIn = new OktaSignIn(
+    {
+        baseUrl: '{{{okta_base_url}}}',
+        clientId: '{{{client_id}}}',
+        redirectUri: '{{{redirect_uri}}}',
+        authParams: {
+            pkce: false
+        },
+        username: '{{default_user}}'
+    }
+    );
+
+    signIn.showSignInAndRedirect({
+        el: '#widget-container'
+    }).catch(function(error) {
+    // Handle error
+    });
+}
+
+</script>

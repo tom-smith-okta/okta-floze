@@ -1,0 +1,8 @@
+{
+
+	"extends": "default",
+
+	"css_okta_widget_url": "https://global.oktacdn.com/okta-signin-widget/3.8.2/css/okta-sign-in.min.css",
+
+	"js_okta_widget_url": "https://global.oktacdn.com/okta-signin-widget/3.8.2/js/okta-sign-in.min.js"
+}

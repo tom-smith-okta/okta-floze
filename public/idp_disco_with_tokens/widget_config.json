@@ -1,0 +1,10 @@
+{
+	"extends": "implicit_flow",
+	"features": {
+		"idpDiscovery": true
+	},
+	"idpDiscovery": {
+		"requestContext": "{{REDIRECT_URI}}"
+	},
+	"username": "nick.fury@idpx.com"
+}
