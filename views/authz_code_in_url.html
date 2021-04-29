@@ -1,0 +1,16 @@
+
+<script>
+
+function authz_code_in_url(callback) {
+
+    const params = new URLSearchParams(window.location.search)
+
+    if (params.has('code')) {
+        return callback(null, params.get('code'))
+    }
+    else {
+        return callback("none")
+    }
+}
+
+</script>

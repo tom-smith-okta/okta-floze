@@ -1,8 +1,18 @@
 {
+	"authz_code": {
+		"client_id": "0oaytv72zgmZl159Y0h7",
+		"default_user": "zoe.saldana",
+		"desc": "use the Okta widget to get an authz code and post it to the server",
+		"issuer": "https://microdemos.oktapreview.com/oauth2/default",
+		"okta_base_url": "https://microdemos.oktapreview.com",
+        "okta_widget": true,
+        "title": "authz code grant flow"
+	},
 	"inline_hook": {
 		"client_id": "0oays0rfpmeuVIf1f0h7",
 		"default_user": "geena.davis",
-		"desc": "use an inline hook to add claims to the id token and access token",
+		"desc": "use an inline hook to add claims to the id token and access token (implicit flow)",
+		"instrux": "make sure that https://okta-webhooks.herokuapp.com is awake.",
 		"notes": "hook points to https://okta-webhooks.herokuapp.com/",
 		"okta_base_url": "https://microdemos.oktapreview.com",
         "okta_widget": true,

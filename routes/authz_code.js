@@ -1,7 +1,9 @@
 
-// const request = require('request')
+const request = require('request')
 
 // const utils = require(process.env.DEMO_FS_HOME + '/utils/utils.js')
+
+const config = require("../config.json")
 
 const utils = require('../utils/utils.js')
 
@@ -10,74 +12,56 @@ const utils = require('../utils/utils.js')
 module.exports = function(app){
 	app.post('/code', function (req, res) {
 
-		console.log("received a post.")
+		const code = req.body.code
 
-		console.log("the body is:")
+		const flow_name = req.body.flow_name
 
-		console.dir(req.body)
+		const client_id = config[flow_name].client_id
 
-		console.log("the code is:")
+		const client_secret = process.env[client_id]
 
-		console.dir(req.body.code)
+		console.log("flow name: " + flow_name)
 
-		console.log("the state is:")
+		console.log("client_id: " + client_id)
 
-		console.log(req.body.state)
-
-		if (req.body.state != req.session.state) {
-			res.send("something strange happened. the state value does not match.")
+		var options = {
+			'method': 'POST',
+			'url': config[flow_name].issuer + '/v1/token',
+			'headers': {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			form: {
+				'grant_type': 'authorization_code',
+				'redirect_uri': process.env.REDIRECT_URI_BASE + "/" + flow_name,
+				'code': code,
+				'client_id': client_id,
+				'client_secret': client_secret
+			}
 		}
-		else {
 
-			console.log(req.session.state)
+		console.dir(options)
 
-			var demo_name = req.body.demo_name
+		request(options, function (error, response) { 
+			if (error) {
+				res.json({"error": "something went wrong with the token reques to okta"})
+				return
+			}
 
-			utils.demo_name_is_valid(demo_name)
-			.then(demo_name => utils.init_demo(demo_name), demo_name => invalid_url(res, demo_name))
-			.then(demo => utils.get_settings(demo))
-			.then(settings => {
+			console.log(response.body)
 
-				const client_key_name = "client_" + settings.okta_client_id
+			var obj = JSON.parse(response.body)
 
-				const client_secret = process.env[client_key_name]
+			console.log("the access token is: ")
 
-				var options = {
-					'method': 'POST',
-					'url': settings.okta_issuer + '/v1/token',
-					'headers': {
-						'Content-Type': 'application/x-www-form-urlencoded'
-					},
-					form: {
-						'grant_type': 'authorization_code',
-						'redirect_uri': settings.REDIRECT_URI,
-						'code': req.body.code,
-						'client_id': settings.okta_client_id,
-						'client_secret': client_secret
-					}
-				}
+			console.log(obj.access_token)
 
-				console.dir(options)
+			// req.session.access_token = obj.access_token
 
-				request(options, function (error, response) { 
-					if (error) throw new Error(error)
-					console.log(response.body)
+			// console.log("the access token in the session is:")
 
-					var obj = JSON.parse(response.body)
+			// console.log(req.session.access_token)
 
-					console.log("the access token is: ")
-
-					console.log(obj.access_token)
-
-					req.session.access_token = obj.access_token
-
-					console.log("the access token in the session is:")
-
-					console.log(req.session.access_token)
-
-					res.send("received access token")
-				})
-			})
-		}
+			res.json({"access_token": obj.access_token})
+		})
 	})
 }
