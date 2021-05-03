@@ -1,0 +1,25 @@
+
+<script>
+
+function tokens_in_url() {
+
+    let tokens = {}
+
+    const h = window.location.href
+
+    const params = h.split("&")
+    
+    for (let index = 0; index < params.length; index++) {
+        const kvp = params[index].split("=");
+
+        if (kvp[0] == "idToken") {
+            tokens.idToken = kvp[1]
+        }
+        else if (kvp[0] == "access_token") {
+            tokens.accessToken = kvp[1]
+        } 
+    }
+    return tokens
+}
+
+</script>

@@ -29,11 +29,17 @@
 	{{/okta_widget}}
 
 	{{#authz_code}}
-		{{>owc_authz_code}}
 		{{>authz_code_in_url}}
+		{{>owc_authz_code}}
 	{{/authz_code}}
 
+	{{#custom_domain}}
+		{{>tokens_in_url}}
+		{{>owc_custom_domain}}
+	{{/custom_domain}}
+
 	{{#inline_hook}}
+		{{>tokens_in_url}}
 		{{>owc_inline_hook}}
 	{{/inline_hook}}
 

@@ -10,6 +10,7 @@ window.onload = function() {
         {
             baseUrl: '{{{okta_base_url}}}',
             clientId: '{{{client_id}}}',
+            issuer: '{{{issuer}}}',
             redirectUri: '{{{redirect_uri}}}',
             authParams: {
                 pkce: false
@@ -22,7 +23,7 @@ window.onload = function() {
             el: '#widget-container'
         }).catch(function(error) {
         // Handle error
-        });
+        })
     }
     else {
         if ("idToken" in tokens) {

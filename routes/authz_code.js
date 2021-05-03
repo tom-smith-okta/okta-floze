@@ -43,7 +43,7 @@ module.exports = function(app){
 
 		request(options, function (error, response) { 
 			if (error) {
-				res.json({"error": "something went wrong with the token reques to okta"})
+				res.json({"error": "something went wrong with the token request to okta"})
 				return
 			}
 

@@ -1,9 +1,0 @@
-{
-	"inline_hook": {
-		"client_id": "0oays0rfpmeuVIf1f0h7",
-		"desc": "use an inline hook to update the scopes included in an access token",
-		"okta_base_url": "https://microdemos.oktapreview.com",
-        "okta_widget": true,
-        "title": "inline hook updates scopes"
-	}
-}

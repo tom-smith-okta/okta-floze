@@ -17,5 +17,14 @@
 		"okta_base_url": "https://microdemos.oktapreview.com",
         "okta_widget": true,
         "title": "inline hook add claims"
+	},
+	"custom_domain": {
+		"client_id": "0oa326ow7tjZaPcRi4x7",
+		"default_user": "lionel.messi",
+		"desc": "use the Okta widget to get an access token from a custom domain",
+		"issuer": "https://authz-test.atkodemo.com/oauth2/default",
+		"okta_base_url": "https://authz-test.atkodemo.com/",
+        "okta_widget": true,
+        "title": "access token from custom domain"
 	}
 }
