@@ -1,0 +1,47 @@
+{
+	"authz_code": {
+		"client_id": "0oaytv72zgmZl159Y0h7",
+		"default_user": "zoe.saldana",
+		"desc": "use the Okta widget to get an authz code and post it to the server",
+		"issuer": "https://microdemos.oktapreview.com/oauth2/default",
+		"okta_base_url": "https://microdemos.oktapreview.com",
+        "okta_widget": true,
+        "title": "authz code grant flow"
+	},
+	"implicit_flow": {
+		"client_id": "0oayz1s5t93Mlce6l0h7",
+		"default_user": "bruce.banner",
+		"desc": "use the implicit flow to get an id token and access token",
+		"okta_base_url": "https://microdemos.oktapreview.com",
+        "okta_widget": true,
+        "title": "implicit flow"
+	},
+	"implicit_flow_access_token_only": {
+		"parent": "implicit_flow",
+		"client_id": "0oayz1s5t93Mlce6l0h7",
+		"default_user": "bruce.banner",
+		"desc": "use the implicit flow to get an access token",
+		"okta_base_url": "https://microdemos.oktapreview.com",
+        "okta_widget": true,
+        "title": "implicit flow - access token only"
+	},
+	"inline_hook": {
+		"client_id": "0oays0rfpmeuVIf1f0h7",
+		"default_user": "geena.davis",
+		"desc": "use an inline hook to add claims to the id token and access token (implicit flow)",
+		"instrux": "make sure that https://okta-webhooks.herokuapp.com is awake.",
+		"notes": "hook points to https://okta-webhooks.herokuapp.com/",
+		"okta_base_url": "https://microdemos.oktapreview.com",
+        "okta_widget": true,
+        "title": "inline hook add claims"
+	},
+	"custom_domain": {
+		"client_id": "0oa326ow7tjZaPcRi4x7",
+		"default_user": "lionel.messi",
+		"desc": "use the Okta widget to get an access token from a custom domain",
+		"issuer": "https://authz-test.atkodemo.com/oauth2/default",
+		"okta_base_url": "https://authz-test.atkodemo.com/",
+        "okta_widget": true,
+        "title": "access token from custom domain"
+	}
+}

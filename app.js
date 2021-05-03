@@ -142,38 +142,25 @@ function send_page(flow_name, settings, res) {
 
 	return new Promise(function(resolve, reject) {
 
-		settings[flow_name] = true
+		// settings[flow_name] = true
 
 		settings["flow_name"] = flow_name
 
-		settings["redirect_uri"] = process.env.REDIRECT_URI_BASE + "/" + flow_name
+		if ("widget_config" in settings) {
+
+			settings["widget_config"]["redirectUri"] = process.env.REDIRECT_URI_BASE + "/" + flow_name
+
+			if (typeof(settings["widget_config"]) == "object") {
+				settings["widget_config"] = JSON.stringify(settings["widget_config"], null, 2)
+			}
+		}
+		
+		console.dir(settings)
 
 		res.render('index', settings)
 
 		resolve(true)
-	})
-	
-	// 	var page = settings.home_page
-
-	// 	delete settings.page
-
-	// 	// console.dir(settings)
-
-	// 	for (item in settings) {
-	// 		if (config_files.hasOwnProperty(item) && config_files[item].resource_type != "settings" ) {
-	// 			var re = new RegExp('{{' + item + '}}', 'g')
-	// 			page = page.replace(re, settings[item])
-	// 			delete settings[item]
-	// 		}
-	// 	}
-
-	// 	for (item in settings) {
-	// 		var re = new RegExp('{{' + item + '}}', 'g')
-	// 		page = page.replace(re, settings[item])
-	// 	}
-
-	// 	resolve(page)
-	// })
+	})	
 }
 
 // function build_page(settings) {

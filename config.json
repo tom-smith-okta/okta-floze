@@ -8,23 +8,65 @@
         "okta_widget": true,
         "title": "authz code grant flow"
 	},
+	"implicit_flow": {
+		"desc": "use the implicit flow to get an id token and access token",
+        "okta_widget": true,
+        "title": "implicit flow",
+		"user_msg_end": "the tokens are in the console.",
+		"widget_config": {
+			"baseUrl": "https://microdemos.oktapreview.com",
+			"clientId": "0oayz1s5t93Mlce6l0h7",
+			"authParams": {
+				"pkce": false,
+				"responseType": ["id_token", "token"]
+			},
+			"username": "bruce.banner"
+		}
+	},
+	"implicit_flow_access_token_only": {
+		"parent": "implicit_flow",
+		"desc": "use the implicit flow to get an access token",
+        "title": "implicit flow - access token only",
+		"user_msg_end": "the access token is in the console.",
+		"widget_config": {
+			"authParams": {
+				"responseType": ["token"]
+			}
+		}
+	},
+	"implicit_flow_id_token_only": {
+		"parent": "implicit_flow",
+		"desc": "use the implicit flow to get an id token",
+        "title": "implicit flow - id token only",
+		"user_msg_end": "the id token is in the console.",
+		"widget_config": {
+			"authParams": {
+				"responseType": ["id_token"]
+			}
+		}
+	},
 	"inline_hook": {
-		"client_id": "0oays0rfpmeuVIf1f0h7",
-		"default_user": "geena.davis",
-		"desc": "use an inline hook to add claims to the id token and access token (implicit flow)",
+		"parent": "implicit_flow",
+		"desc": "use an inline hook to add a claim 'external_attribute' to the id token and to the access token (implicit flow)",
 		"instrux": "make sure that https://okta-webhooks.herokuapp.com is awake.",
 		"notes": "hook points to https://okta-webhooks.herokuapp.com/",
-		"okta_base_url": "https://microdemos.oktapreview.com",
-        "okta_widget": true,
-        "title": "inline hook add claims"
+        "title": "inline hook add claims",
+		"widget_config": {
+			"clientId": "0oays0rfpmeuVIf1f0h7",
+			"username": "geena.davis"
+		}
 	},
 	"custom_domain": {
-		"client_id": "0oa326ow7tjZaPcRi4x7",
-		"default_user": "lionel.messi",
-		"desc": "use the Okta widget to get an access token from a custom domain",
-		"issuer": "https://authz-test.atkodemo.com/oauth2/default",
-		"okta_base_url": "https://authz-test.atkodemo.com/",
-        "okta_widget": true,
-        "title": "access token from custom domain"
+		"parent": "implicit_flow",
+		"desc": "use the Okta widget to get an access token from an authorization server with a custom domain",
+        "title": "access token from custom domain",
+		"widget_config": {
+			"authParams": {
+				"issuer": "https://authz-test.atkodemo.com/oauth2/default"
+			},			
+			"clientId": "0oa326ow7tjZaPcRi4x7",
+			"baseUrl": "https://authz-test.atkodemo.com",
+			"username": "lionel.messi"
+		}
 	}
 }

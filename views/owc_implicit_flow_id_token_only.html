@@ -3,17 +3,9 @@
 
 window.onload = function() {
 
-    var oktaSignIn = new OktaSignIn(
-    {
-        baseUrl: '{{{okta_base_url}}}',
-        clientId: '{{{client_id}}}',
-        redirectUri: '{{{redirect_uri}}}',
-        authParams: {
-            pkce: false
-        },
-        username: '{{default_user}}'
-    }
-    );
+    const widget_config = '{{{widget_config}}}'
+
+    var oktaSignIn = new OktaSignIn(JSON.parse(widget_config));
 
     oktaSignIn.showSignInToGetTokens({
         el: '#widget-container'
@@ -32,7 +24,8 @@ window.onload = function() {
             console.log(accessToken.value)
         }
 
-        $("#instrux").html("<p>the access token and id token are in the console.</p>")
+        $("#instrux").html("<p>{{user_msg_end}}</p>")
+
     }).catch(function(err) {
         console.error(err);
     });

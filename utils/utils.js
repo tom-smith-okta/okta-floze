@@ -175,9 +175,49 @@ module.exports = {
 	get_settings: function(flow_name) {
 
 		return new Promise(function(resolve, reject) {
-			const settings = config[flow_name]
 
-			resolve(settings)
+			let settings = config[flow_name]
+
+			console.dir(settings)
+
+			if ("parent" in settings) {
+				const parent_flow = settings["parent"]
+				parent_settings = config[parent_flow]
+
+				console.log("the parent settings are:")
+				console.dir(parent_settings)
+
+				for (setting in parent_settings) {
+					if (setting == "widget_config") {
+
+						console.log("there is a widget config object in the parent settings")
+	
+						if ("widget_config" in settings) {
+	
+							for(const v in settings["widget_config"]) {
+	
+								if (v == "authParams") {
+									for (x in settings["widget_config"]["authParams"]) {
+										parent_settings["widget_config"]["authParams"][x] = settings["widget_config"]["authParams"][x]
+									}
+								}
+								else {
+									parent_settings["widget_config"][v] = settings["widget_config"][v]
+								}
+							}
+						}
+						settings["widget_config"] = parent_settings["widget_config"]
+					}
+					else if (!(setting in settings)) {
+						settings[setting] = parent_settings[setting]
+					}
+				}
+			}
+
+			// do a JSON cycle to ensure a clean object w/o pointers to stale sub-objects
+			temp = JSON.stringify(settings)
+			resolve(JSON.parse(temp))
+
 			// module.exports.set_paths(demo)
 			// .then(demo => module.exports.set_values(demo))
 			// .then(demo => module.exports.set_settings(demo))

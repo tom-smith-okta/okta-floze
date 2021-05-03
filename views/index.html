@@ -15,7 +15,6 @@
 	<!-- ******* OKTA WIDGET CSS******** -->
 	<!-- <link href="https://global.oktacdn.com/okta-signin-widget/5.5.3/css/okta-sign-in.min.css" type="text/css" rel="stylesheet"/> -->
 	<link href="https://global.oktacdn.com/okta-signin-widget/5.5.4/css/okta-sign-in.min.css" type="text/css" rel="stylesheet"/>
-
 	{{/okta_widget}}
 
 	<!-- ******* JAVASCRIPT ******** -->
@@ -33,15 +32,9 @@
 		{{>owc_authz_code}}
 	{{/authz_code}}
 
-	{{#custom_domain}}
-		{{>tokens_in_url}}
-		{{>owc_custom_domain}}
-	{{/custom_domain}}
-
-	{{#inline_hook}}
-		{{>tokens_in_url}}
-		{{>owc_inline_hook}}
-	{{/inline_hook}}
+	{{#okta_widget}}
+		{{>widget}}
+	{{/okta_widget}}
 
 </head>
 

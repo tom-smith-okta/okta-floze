@@ -9,7 +9,8 @@ window.onload = function() {
         clientId: '{{{client_id}}}',
         redirectUri: '{{{redirect_uri}}}',
         authParams: {
-            pkce: false
+            pkce: false,
+            responseType: ['token']
         },
         username: '{{default_user}}'
     }
@@ -32,7 +33,7 @@ window.onload = function() {
             console.log(accessToken.value)
         }
 
-        $("#instrux").html("<p>the access token and id token are in the console.</p>")
+        $("#instrux").html("<p>the access token is in the console.</p>")
     }).catch(function(err) {
         console.error(err);
     });
