@@ -60,12 +60,10 @@
 		"parent": "implicit_flow",
 		"desc": "use the Okta widget to get an access token from an authorization server with a custom domain",
         "title": "access token from custom domain",
-		"widget_config": {
-			"authParams": {
-				"issuer": "https://authz-test.atkodemo.com/oauth2/default"
-			},			
+		"widget_config": {	
 			"clientId": "0oa326ow7tjZaPcRi4x7",
 			"baseUrl": "https://authz-test.atkodemo.com",
+			"issuer": "https://authz-test.atkodemo.com/oauth2/default",
 			"username": "lionel.messi"
 		}
 	}
