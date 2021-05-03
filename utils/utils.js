@@ -189,8 +189,6 @@ module.exports = {
 
 				for (setting in parent_settings) {
 					if (setting == "widget_config") {
-
-						console.log("there is a widget config object in the parent settings")
 	
 						if ("widget_config" in settings) {
 	
