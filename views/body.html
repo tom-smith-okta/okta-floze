@@ -9,18 +9,21 @@
 
 {{/home}}
 
-{{#desc}}
-<p id="desc">desc: {{desc}}</p>
-{{/desc}}
-
-<p id="instrux">
-{{#instrux}}
-    instrux: {{instrux}}</p>
-{{/instrux}}
-</p>
-
-{{#okta_widget}}
-
-<div id="widget-container"></div>
-
-{{/okta_widget}}
+<div class="row">
+    <div class="col-4">
+        {{#desc}}
+        <p id="desc">{{desc}}</p>
+        {{/desc}}
+        
+        <p id="instrux">
+        {{#instrux}}
+            instrux: {{instrux}}</p>
+        {{/instrux}}
+        </p>
+    </div>
+    <div class="col-8">
+        {{#widget_config}}
+        <div id="widget-container"></div>
+        {{/widget_config}}
+    </div>
+</div>

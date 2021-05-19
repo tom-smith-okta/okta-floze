@@ -178,6 +178,7 @@ module.exports = {
 
 			let settings = config[flow_name]
 
+			console.log("in the get settings function, the settings are:")
 			console.dir(settings)
 
 			if ("parent" in settings) {
@@ -208,6 +209,16 @@ module.exports = {
 					}
 					else if (!(setting in settings)) {
 						settings[setting] = parent_settings[setting]
+					}
+				}
+			}
+
+			if ("widget_config" in settings) {
+				if ("baseUrl" in settings.widget_config) {
+					const baseUrl = settings.widget_config.baseUrl
+					const lastChar = baseUrl[baseUrl.length -1]
+					if (lastChar == "/") {
+						settings.widget_config.baseUrl = baseUrl.slice(0, -1)
 					}
 				}
 			}

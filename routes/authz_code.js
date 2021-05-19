@@ -16,7 +16,7 @@ module.exports = function(app){
 
 		const flow_name = req.body.flow_name
 
-		const client_id = config[flow_name].client_id
+		const client_id = config[flow_name].widget_config.clientId
 
 		const client_secret = process.env[client_id]
 
@@ -26,7 +26,7 @@ module.exports = function(app){
 
 		var options = {
 			'method': 'POST',
-			'url': config[flow_name].issuer + '/v1/token',
+			'url': config[flow_name].widget_config.authParams.issuer + '/v1/token',
 			'headers': {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			},

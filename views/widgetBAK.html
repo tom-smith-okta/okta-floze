@@ -1,0 +1,37 @@
+
+<script>
+
+window.onload = function() {
+
+    const widget_config =
+`{{{widget_config}}}`
+
+    var oktaSignIn = new OktaSignIn(JSON.parse(widget_config));
+
+    oktaSignIn.showSignInToGetTokens({
+        el: '#widget-container'
+    }).then(function(tokens) {
+        oktaSignIn.authClient.tokenManager.setTokens(tokens);
+        oktaSignIn.remove();
+
+        if("idToken" in tokens) {
+            const idToken = tokens.idToken;
+            console.log("id token:")
+            console.log(idToken.value)
+            console.dir(idToken)
+        }
+        if("accessToken" in tokens) {
+            const accessToken = tokens.accessToken;
+            console.log("access token:")
+            console.log(accessToken.value)
+            console.dir(accessToken)
+        }
+
+        $("#instrux").html("<p>{{user_msg_end}}</p>")
+
+    }).catch(function(err) {
+        console.error(err);
+    });
+}
+
+</script>
