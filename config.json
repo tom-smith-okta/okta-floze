@@ -66,24 +66,11 @@
 	"custom_domain": {
 		"parent": "implicit_flow",
 		"desc": "use the Okta widget to get an access token from an authorization server with a custom domain",
+		"notes": "actual okta domain is https://dev-793976.okta.com",
         "title": "access token from custom domain",
 		"widget_config": {	
 			"clientId": "0oa326ow7tjZaPcRi4x7",
-			"baseUrl": "https://dev-793976.okta.com/",
-			"username": "lionel.messi",
-			"authParams": {
-				"issuer": "https://dev-793976.okta.com/oauth2/default",
-				"responseType": ["id_token", "token"]
-			}
-		}
-	},
-	"bug_custom_domain_custom_domain": {
-		"parent": "implicit_flow",
-		"desc": "widget hangs on /authorize call",
-        "title": "bug: widget hangs on custom domain",
-		"widget_config": {	
-			"clientId": "0oa326ow7tjZaPcRi4x7",
-			"baseUrl": "https://authz-test.okta.com/",
+			"baseUrl": "https://authz-test.atkodemo.com",
 			"username": "lionel.messi"
 		}
 	}
