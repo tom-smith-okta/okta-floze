@@ -20,7 +20,32 @@
             instrux: {{instrux}}</p>
         {{/instrux}}
         </p>
+
+        {{#okta_session}}
+        <hr>
+        <p>okta session:</p>
+        <p id="no_okta_session">none</p>
+        <div id="okta_logout" style="display: none;">
+            <p>Welcome, <span id="username"></span>!</p>
+            <p>
+                <a href="{{{logout_uri}}}">log out of okta</a>
+            </p>
+        </div>
+        {{/okta_session}}
+
+        {{#onload_idp_disco}}
+        <hr>
+        <p>external IDP session:</p>
+        <p id="no_external_session">none</p>
+        <div id="external_idp_logout" style="display: none;">
+            <p>Welcome, <span id="external_username"></span>!</p>
+            <p>
+                <a href="{{{external_idp_logout_uri}}}">log out of external idp</a>
+            </p>
+        </div>
+        {{/onload_idp_disco}}
     </div>
+
     <div class="col-8">
         {{#widget_config}}
         <div id="widget-container"></div>

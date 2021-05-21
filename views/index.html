@@ -26,13 +26,27 @@
 	<script src="https://global.oktacdn.com/okta-signin-widget/5.5.4/js/okta-sign-in.min.js" type="text/javascript"></script>
 	{{/widget_config}}
 
-	{{#widget_implicit}}
-		{{>widget_implicit}}
-	{{/widget_implicit}}
+	{{#widget_config}}
+		{{>widget_init}}
 
-	{{#widget_code}}
-		{{>widget_code}}
-	{{/widget_code}}
+		{{#implicit_flow}}
+			{{>show_widget_to_get_tokens}}
+		{{/implicit_flow}}
+
+		{{#onload_implicit}}
+			{{>onload_implicit}}
+		{{/onload_implicit}}
+
+		{{#onload_code_flow}}
+			{{>onload_code_flow}}
+		{{/onload_code_flow}}
+
+		{{#onload_idp_disco}}
+			{{>onload_idp_disco}}
+		{{/onload_idp_disco}}
+
+		
+	{{/widget_config}}
 
 </head>
 

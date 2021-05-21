@@ -130,6 +130,8 @@ app.get('/:flow_name', function (req, res) {
 
 	console.log("the flow name is: " + req.params.flow_name)
 
+	wake_up_webhook_svc()
+
 	utils.flow_name_is_valid(flow_name)
 	.then(flow_name => utils.get_settings(flow_name))
 	.then(settings => send_page(flow_name, settings, res))
@@ -148,7 +150,26 @@ function send_page(flow_name, settings, res) {
 
 		if ("widget_config" in settings) {
 
-			settings["widget_config"]["redirectUri"] = process.env.REDIRECT_URI_BASE + "/" + flow_name
+			const redirect_uri = process.env.REDIRECT_URI_BASE + "/" + flow_name
+
+			settings["widget_config"]["redirectUri"] = redirect_uri
+
+			if ("features" in settings.widget_config && 
+				"idpDiscovery" in settings.widget_config.features &&
+				settings.widget_config.features) {
+				settings.widget_config.idpDiscovery = {
+					"requestContext": redirect_uri
+				}
+
+				settings.external_idp_logout_uri = settings.external_idp_logout_uri.replace("{{{redirect_uri}}}", redirect_uri)
+			}
+
+			if ("logout_uri" in settings) {
+				settings.logout_uri = settings.logout_uri.replace("{{{redirect_uri}}}", redirect_uri)
+			}
+
+
+			settings["redirect_uri"] = redirect_uri
 
 			if (typeof(settings["widget_config"]) == "object") {
 				settings["widget_config"] = JSON.stringify(settings["widget_config"], null, 2)
@@ -163,47 +184,6 @@ function send_page(flow_name, settings, res) {
 	})	
 }
 
-// function build_page(settings) {
-
-// 	return new Promise(function(resolve, reject) {
-
-// 		var page = settings.home_page
-
-// 		delete settings.page
-
-// 		// console.dir(settings)
-
-// 		for (item in settings) {
-// 			if (config_files.hasOwnProperty(item) && config_files[item].resource_type != "settings" ) {
-// 				var re = new RegExp('{{' + item + '}}', 'g')
-// 				page = page.replace(re, settings[item])
-// 				delete settings[item]
-// 			}
-// 		}
-
-// 		for (item in settings) {
-// 			var re = new RegExp('{{' + item + '}}', 'g')
-// 			page = page.replace(re, settings[item])
-// 		}
-
-// 		resolve(page)
-// 	})
-// }
-
-// belongs in /:demo route
-// 				var unresolved_placeholders = page.match(regex)
-
-// 				var html = ""
-
-// 				if (!(unresolved_placeholders === null)) {
-
-// 					html += "Warning: unresolved_placeholders"
-
-// 					for (item of unresolved_placeholders) {
-// 						page = page.replace(item, "<!--" + item + "-->")
-// 						html += "<br>" + item
-// 					}
-// 				}
-
-// 				page = page.replace(/{{unresolved_placeholders}}/g, html)
-
+function wake_up_webhook_svc() {
+	
+}

@@ -30,9 +30,21 @@ function show_widget_to_get_tokens() {
 
 window.onload = function() {
 
-    oktaSignIn = widget_init()
+    const widget_config =
+`{{{widget_config}}}`
 
-    show_widget_to_get_tokens()
+    var oktaSignIn = new OktaSignIn(JSON.parse(widget_config))
+
+    oktaSignIn.authClient.session.exists().then(function (sessionExists) {
+        if (sessionExists) {
+            signIn.authClient.token.getWithoutPrompt().then(function (tokens) {
+                signIn.authClient.tokenManager.setTokens(tokens)
+            })
+        }
+        else {
+            show_widget()
+        }
+    })
 }
 
 </script>

@@ -1,9 +1,9 @@
 {
 	"authz_code": {
 		"desc": "Use the Okta widget to get an authorization code and post it to the server.",
+		"onload_code_flow": true,
         "title": "authz code grant flow",
 		"user_msg_end": "Success! The access token is now in the console. NOTE: in a web app (which this is) you would not normally send the access token back to the browser; it's here for demo purposes only.",
-		"widget_code": true,
 		"widget_config": {
 			"baseUrl": "https://microdemos.oktapreview.com",
 			"clientId": "0oaytv72zgmZl159Y0h7",
@@ -17,7 +17,8 @@
 	},
 	"implicit_flow": {
 		"desc": "Use the Okta widget (implicit flow) to get an id token and access token.",
-        "widget_implicit": true,
+        "implicit_flow": true,
+		"onload_implicit": true,
         "title": "implicit flow",
 		"user_msg_end": "Success! The tokens are in the console.",
 		"widget_config": {
@@ -72,6 +73,31 @@
 			"clientId": "0oa326ow7tjZaPcRi4x7",
 			"baseUrl": "https://authz-test.atkodemo.com",
 			"username": "lionel.messi"
+		}
+	},
+	"idp_discovery": {
+		"desc": "Use the Okta widget to 1) authenticate vs. an external IDP; 2) get an Okta session; 3) get an id token and an access token.",
+		"okta_session": true,
+		"onload_idp_disco": true,
+		"logout_uri": "https://microdemos.oktapreview.com/login/signout?fromURI={{{redirect_uri}}}",
+		"external_idp_logout_uri": "https://idpx.oktapreview.com/login/signout?fromURI={{{redirect_uri}}}",
+        "title": "idp discovery",
+		"user_msg_end": "Success! The tokens are in the console.",
+		"widget_config": {	
+			"clientId": "0oayz1s5t93Mlce6l0h7",
+			"baseUrl": "https://microdemos.oktapreview.com",
+			"username": "diana.prince@idpx.com",
+			"authParams": {
+				"pkce": false,
+				"responseType": ["id_token", "token"]
+			},
+			"features": {
+				"idpDiscovery": true,
+				"rememberMe": false
+			},
+			"idpDiscovery": {
+				"requestContext": "{{{redirect_uri}}}"
+			}
 		}
 	}
 }
