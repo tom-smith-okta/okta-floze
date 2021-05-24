@@ -144,33 +144,17 @@ function send_page(flow_name, settings, res) {
 
 	return new Promise(function(resolve, reject) {
 
-		// settings[flow_name] = true
+		const redirect_uri = process.env.REDIRECT_URI_BASE + "/" + flow_name
 
 		settings["flow_name"] = flow_name
 
+		settings_json = JSON.stringify(settings)
+
+		settings_json = settings_json.replace(/{{{redirect_uri}}}/gi, redirect_uri)
+
+		settings = JSON.parse(settings_json)
+
 		if ("widget_config" in settings) {
-
-			const redirect_uri = process.env.REDIRECT_URI_BASE + "/" + flow_name
-
-			settings["widget_config"]["redirectUri"] = redirect_uri
-
-			if ("features" in settings.widget_config && 
-				"idpDiscovery" in settings.widget_config.features &&
-				settings.widget_config.features) {
-				settings.widget_config.idpDiscovery = {
-					"requestContext": redirect_uri
-				}
-
-				settings.external_idp_logout_uri = settings.external_idp_logout_uri.replace("{{{redirect_uri}}}", redirect_uri)
-			}
-
-			if ("logout_uri" in settings) {
-				settings.logout_uri = settings.logout_uri.replace("{{{redirect_uri}}}", redirect_uri)
-			}
-
-
-			settings["redirect_uri"] = redirect_uri
-
 			if (typeof(settings["widget_config"]) == "object") {
 				settings["widget_config"] = JSON.stringify(settings["widget_config"], null, 2)
 			}

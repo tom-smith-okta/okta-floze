@@ -12,6 +12,7 @@
 				"pkce": false,
 				"responseType": "code"
 			},
+			"redirectUri": "{{{redirect_uri}}}",
 			"username": "zoe.saldana"
 		}
 	},
@@ -28,6 +29,7 @@
 				"pkce": false,
 				"responseType": ["id_token", "token"]
 			},
+			"redirectUri": "{{{redirect_uri}}}",
 			"username": "bruce.banner"
 		}
 	},
@@ -86,6 +88,7 @@
 		"widget_config": {	
 			"clientId": "0oayz1s5t93Mlce6l0h7",
 			"baseUrl": "https://microdemos.oktapreview.com",
+			"redirectUri": "{{{redirect_uri}}}",
 			"username": "diana.prince@idpx.com",
 			"authParams": {
 				"pkce": false,
