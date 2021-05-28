@@ -2,6 +2,8 @@
 
 require('dotenv').config()
 
+const axios = require('axios').default
+
 const express = require('express')
 
 const mustacheExpress = require('mustache-express')
@@ -154,5 +156,21 @@ function send_page(flow_name, settings, res) {
 }
 
 function wake_up_webhook_svc() {
-	
+
+	const heroku_url = "https://okta-webhooks.herokuapp.com"
+
+	axios.get(heroku_url)
+	.then(function (response) {
+		// handle success
+		if (response.status == 200) {
+			console.log("the heroku webhooks site is awake.")
+		}
+	})
+	.catch(function (error) {
+		// handle error
+		console.log(error);
+	})
+	.then(function () {
+		// always executed
+	})
 }
