@@ -17,18 +17,24 @@
         
         <p id="instrux">
         {{#instrux}}
-            instrux: {{instrux}}</p>
+            instrux: {{instrux}}
         {{/instrux}}
         </p>
 
+        {{#show_password}}
+        <p id="password">
+            password: {{password}}</p>
+        </p>
+        {{/show_password}}
+
         {{#okta_session}}
         <hr>
-        <p>okta session:</p>
+        <p>Okta session:</p>
         <p id="no_okta_session">none</p>
         <div id="okta_logout" style="display: none;">
             <p>Welcome, <span id="username"></span>!</p>
             <p>
-                <a href="{{{logout_uri}}}">log out of okta</a>
+                <a href="{{{okta_tenant}}}/login/signout?fromURI={{{redirect_uri}}}"><button>log out</button></a> ({{{okta_tenant}}})
             </p>
         </div>
         {{/okta_session}}
@@ -40,7 +46,7 @@
         <div id="external_idp_logout" style="display: none;">
             <p>Welcome, <span id="external_username"></span>!</p>
             <p>
-                <a href="{{{external_idp_logout_uri}}}">log out of external idp</a>
+                <a href="{{{external_idp}}}/login/signout?fromURI={{{redirect_uri}}}"><button>log out</button></a> ({{{external_idp}}})
             </p>
         </div>
         {{/onload_idp_disco}}

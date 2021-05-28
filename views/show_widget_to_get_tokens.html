@@ -8,20 +8,30 @@ function show_widget_to_get_tokens() {
         oktaSignIn.authClient.tokenManager.setTokens(tokens);
         oktaSignIn.remove();
 
+        let username
+
         if("idToken" in tokens) {
-            const idToken = tokens.idToken;
+            const idToken = tokens.idToken
             console.log("id token:")
             console.log(idToken.value)
             console.dir(idToken)
+            username = idToken.claims.email
         }
+
         if("accessToken" in tokens) {
-            const accessToken = tokens.accessToken;
+            const accessToken = tokens.accessToken
             console.log("access token:")
             console.log(accessToken.value)
             console.dir(accessToken)
+            username = accessToken.claims.sub
         }
 
         $("#instrux").html("<p>{{user_msg_end}}</p>")
+
+        $("#okta_logout").show()
+        $("#no_okta_session").hide()
+        $("#username").html(username)
+        $("#password").hide()
 
     }).catch(function(err) {
         console.error(err);

@@ -24,9 +24,13 @@ module.exports = function(app){
 
 		console.log("client_id: " + client_id)
 
+		let issuer = config[flow_name].widget_config.authParams.issuer
+
+		issuer = issuer.replace("{{{okta_tenant}}}", config[flow_name].okta_tenant)
+
 		var options = {
 			'method': 'POST',
-			'url': config[flow_name].widget_config.authParams.issuer + '/v1/token',
+			'url': issuer + '/v1/token',
 			'headers': {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			},

@@ -29,6 +29,7 @@ window.onload = function() {
                     $("#external_idp_logout").show()
                     $("#no_external_session").hide()
                     $("#external_username").html(user.login)
+                    $("#password").hide()
                 }
                 oktaSignIn.authClient.token.getWithoutPrompt().then(function (tokens) {
                     oktaSignIn.authClient.tokenManager.setTokens(tokens)
@@ -38,7 +39,6 @@ window.onload = function() {
             })
         }
         else {
-
             oktaSignIn.showSignInAndRedirect({
                 el: '#widget-container'
             }).catch(function(error) {
@@ -49,9 +49,8 @@ window.onload = function() {
 }
 
 function session_exists_at_external_idp(callback) {
-
     $.ajax({
-        url: "https://idpx.oktapreview.com/api/v1/sessions/me",
+        url: "{{{external_idp}}}/api/v1/sessions/me",
         cache: false,
         xhrFields: {
             withCredentials: true

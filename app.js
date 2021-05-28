@@ -144,22 +144,7 @@ function send_page(flow_name, settings, res) {
 
 	return new Promise(function(resolve, reject) {
 
-		const redirect_uri = process.env.REDIRECT_URI_BASE + "/" + flow_name
-
-		settings["flow_name"] = flow_name
-
-		settings_json = JSON.stringify(settings)
-
-		settings_json = settings_json.replace(/{{{redirect_uri}}}/gi, redirect_uri)
-
-		settings = JSON.parse(settings_json)
-
-		if ("widget_config" in settings) {
-			if (typeof(settings["widget_config"]) == "object") {
-				settings["widget_config"] = JSON.stringify(settings["widget_config"], null, 2)
-			}
-		}
-		
+		console.log("the final settings are:")
 		console.dir(settings)
 
 		res.render('index', settings)

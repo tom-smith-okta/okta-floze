@@ -1,13 +1,15 @@
 
 const fs = require('fs')
 
-// const request = require('request')
-
 ////////////////////////////////////////////////////
 
-const config = require("../config.json")
+const c = require("../config.json")
 
-// const config_files = require(process.env.DEMO_FS_HOME + "/config/config_files.json")
+let flow_names = []
+
+for (const flow in c) {
+	flow_names.push(flow)
+}
 
 ////////////////////////////////////////////////////
 
@@ -95,20 +97,13 @@ module.exports = {
 	},
 
 	flow_name_is_valid: function(flow_name) {
-
 		return new Promise(function(resolve, reject) {
-
-			module.exports.get_valid_flow_names()
-			.then(flow_names => {
-				if (flow_names.includes(flow_name)) {
-					resolve(flow_name)
-				}
-				else {
-					reject({error: "the flow name is not valid"})
-				}
-			}, err => {
-				reject(err)
-			})
+			if (flow_names.includes(flow_name)) {
+				resolve(flow_name)
+			}
+			else {
+				reject({error: "the flow name is not valid"})
+			}
 		})
 	},
 
@@ -176,10 +171,33 @@ module.exports = {
 
 		return new Promise(function(resolve, reject) {
 
+			const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
+
 			let settings = config[flow_name]
+
+			settings["flow_name"] = flow_name
+
+			if ("okta_tenant" in settings) {
+
+				const okta_tenant = settings["okta_tenant"]
+
+				const lastChar = okta_tenant[okta_tenant.length -1]
+
+				if (lastChar == "/") {
+					settings.okta_tenant = okta_tenant.slice(0, -1)
+				}
+			}
 
 			console.log("in the get settings function, the settings are:")
 			console.dir(settings)
+
+			if ("REDIRECT_URI_BASE" in process.env) {
+				settings["redirect_uri"] = process.env.REDIRECT_URI_BASE + "/" + flow_name
+			}
+
+			if ("PASSWORD" in process.env) {
+				settings["password"] = process.env.PASSWORD
+			}
 
 			if ("parent" in settings) {
 				const parent_flow = settings["parent"]
@@ -213,26 +231,20 @@ module.exports = {
 				}
 			}
 
+			let settings_json = JSON.stringify(settings)
+
+			settings_json = settings_json.replace(/{{{redirect_uri}}}/gi, settings["redirect_uri"])
+			settings_json = settings_json.replace(/{{{okta_tenant}}}/gi, settings["okta_tenant"])
+	
+			settings = JSON.parse(settings_json)
+	
 			if ("widget_config" in settings) {
-				if ("baseUrl" in settings.widget_config) {
-					const baseUrl = settings.widget_config.baseUrl
-					const lastChar = baseUrl[baseUrl.length -1]
-					if (lastChar == "/") {
-						settings.widget_config.baseUrl = baseUrl.slice(0, -1)
-					}
+				if (typeof(settings["widget_config"]) == "object") {
+					settings["widget_config"] = JSON.stringify(settings["widget_config"], null, 2)
 				}
 			}
 
-			// do a JSON cycle to ensure a clean object w/o pointers to stale sub-objects
-			temp = JSON.stringify(settings)
-			resolve(JSON.parse(temp))
-
-			// module.exports.set_paths(demo)
-			// .then(demo => module.exports.set_values(demo))
-			// .then(demo => module.exports.set_settings(demo))
-			// .then(settings => {
-			// 	resolve(settings)
-			// })
+			resolve(settings)
 		})
 	},
 
