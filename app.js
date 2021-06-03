@@ -8,34 +8,11 @@ const express = require('express')
 
 const mustacheExpress = require('mustache-express')
 
-// const request = require('request')
-
-// const session = require('express-session')
-
-// for session management
-
-// const DynamoDBStore = require('connect-dynamodb')(session)
-
 ///////////////////////////////////////////////////
 
 const config = require("./config.json")
 
-// const config_files = require("./config/config_files.json")
-
 const utils = require('./utils/utils.js')
-
-const default_demo_name = 'default'
-
-const default_web_home = '/' + default_demo_name
-
-const default_fs_dir = process.env.DEMO_FS_HOME + '/public' + default_web_home
-
-process.env.default_fs_dir = default_fs_dir
-process.env.default_web_home = default_web_home
-
-const default_username = "lois.lane"
-
-process.env.default_username = default_username
 
 ///////////////////////////////////////////////////
 
@@ -52,18 +29,6 @@ app.use(express.json())
 app.engine('html', mustacheExpress())
 
 app.set('view engine', 'html')
-
-var app_session_config = {
-	secret: process.env.session_secret,
-	resave: false,
-	saveUninitialized: true
-}
-
-// if (process.env.hasOwnProperty("session_store") && process.env.session_store == "dynamodb") {
-// 	app_session_config.store = new DynamoDBStore()
-// }
-
-// app.use(session(app_session_config))
 
 app.listen(port, function () {
 	console.log('App listening on port ' + port + '...')

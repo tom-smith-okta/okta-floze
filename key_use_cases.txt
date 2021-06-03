@@ -1,0 +1,6 @@
+What is the difference between a thin id token and a full id token?
+How do I include groups in a token?
+How do I include custom claims in a token?
+How do I list out a user's assigned app on the client side?
+How do I successfully do IDP discovery with the widget?
+How the F do I get something working with React?

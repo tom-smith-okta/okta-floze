@@ -17,6 +17,8 @@ window.onload = function() {
                 console.dir(session)
                 $("#username").html(session.login)
                 $("#password").hide()
+
+                post_login(session.login)
             })
             .catch(function(err) {
                 // not logged in

@@ -18,6 +18,18 @@
 			"username": "zoe.saldana"
 		}
 	},
+	"aws_sso": {
+		"parent": "implicit_flow",
+		"desc": "SSO to the AWS dashboard",
+		"okta_tenant": "https://dev-948651.okta.com",
+		"post_login_action": true,
+        "title": "AWS SSO",
+		"user_msg_end": "Success! Click on the link below to SSO into the AWS dashboard.",
+		"widget_config": {
+			"clientId": "0oa4s6wliTJ4gBzQC4x6",
+			"username": "diana.prince"
+		}
+	},
 	"implicit_flow": {
 		"desc": "Use the Okta widget (implicit flow) to get an id token and access token.",
         "implicit_flow": true,
@@ -95,7 +107,7 @@
 			"clientId": "0oayz1s5t93Mlce6l0h7",
 			"baseUrl": "{{{okta_tenant}}}",
 			"redirectUri": "{{{redirect_uri}}}",
-			"username": "diana.prince@idpx.com",
+			"username": "alex.hamilton@idpx.com",
 			"authParams": {
 				"pkce": false,
 				"responseType": ["id_token", "token"]

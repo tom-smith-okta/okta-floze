@@ -39,6 +39,11 @@
         </div>
         {{/okta_session}}
 
+        {{#post_login_action}}
+        <hr>
+        <p id="post_login_action"></p>
+        {{/post_login_action}}
+
         {{#onload_idp_disco}}
         <hr>
         <p>external IDP session:</p>

@@ -5,6 +5,7 @@ function show_widget_to_get_tokens() {
     oktaSignIn.showSignInToGetTokens({
         el: '#widget-container'
     }).then(function(tokens) {
+
         oktaSignIn.authClient.tokenManager.setTokens(tokens);
         oktaSignIn.remove();
 
@@ -32,6 +33,8 @@ function show_widget_to_get_tokens() {
         $("#no_okta_session").hide()
         $("#username").html(username)
         $("#password").hide()
+
+        post_login(username)
 
     }).catch(function(err) {
         console.error(err);

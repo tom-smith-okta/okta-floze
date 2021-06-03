@@ -1,0 +1,41 @@
+
+<script>
+
+function post_login(username) {
+
+    const flow = "{{flow_name}}"
+
+    console.log("the flow name is: " + flow)
+
+    if (flow == "aws_sso") {
+        console.log("the flow is AWS.")
+
+        const url = "{{{okta_tenant}}}/api/v1/users/" + username + "/appLinks"
+
+        $.ajax({
+            url: url,
+            cache: false,
+            xhrFields: {
+                withCredentials: true
+            }
+        })
+        .done(function( json ) {
+            console.dir(json)
+
+            for (app of json) {
+                if (app.label == "Amazon Web Services") {
+                    const html = `Click <a href = "${app.linkUrl}" target = "_blank">here</a> to SSO to the AWS dashboard.`
+                    $("#post_login_action").html(html)
+                }
+            }
+
+            // return callback(null, json)
+        })
+        .fail(function() {
+            // return callback(null, false)
+        }) 
+        
+    }
+}
+
+</script>
