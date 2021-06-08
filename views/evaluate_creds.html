@@ -1,10 +1,18 @@
+{{#get_session}}
+<script>
+    const get_session = true;
+</script>
+{{/get_session}}
+
+{{^get_session}}
+<script>
+    const get_session = false;
+</script>
+{{/get_session}}
 
 <script>
 
-function evaluate_creds(get_session) {
-
-    // const get_session = "{{get_session}}"
-
+function evaluate_creds() {
     oktaSignIn.authClient.signInWithCredentials({
         username: $("#username_ff").val(),
         password: $("#password_ff").val()
@@ -30,4 +38,5 @@ function evaluate_creds(get_session) {
         console.error(err);
     });
 }
+
 </script>
