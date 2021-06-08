@@ -4,3 +4,5 @@ How do I include custom claims in a token?
 How do I list out a user's assigned app on the client side?
 How do I successfully do IDP discovery with the widget?
 How the F do I get something working with React?
+
+Have you ever seen how much info we pack into a transaction resulting from a session token request?

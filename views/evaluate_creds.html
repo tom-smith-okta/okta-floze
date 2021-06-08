@@ -1,0 +1,33 @@
+
+<script>
+
+function evaluate_creds(get_session) {
+
+    // const get_session = "{{get_session}}"
+
+    oktaSignIn.authClient.signInWithCredentials({
+        username: $("#username_ff").val(),
+        password: $("#password_ff").val()
+    })
+    .then(function(transaction) {
+        if (transaction.status === 'SUCCESS') {
+            console.log("the sessionToken is:")
+            console.log(transaction.sessionToken)
+            console.dir(transaction)
+
+            $("#no_okta_session").html("Still none. But we have a session token for " + transaction.user.profile.login + ".")
+
+            $("#instrux").html("<p>{{user_msg_end}}</p>")
+
+            if (get_session) {
+                oktaSignIn.authClient.session.setCookieAndRedirect(transaction.sessionToken)
+            }
+        } else {
+            throw 'We cannot handle the ' + transaction.status + ' status';
+        }
+    })
+    .catch(function(err) {
+        console.error(err);
+    });
+}
+</script>

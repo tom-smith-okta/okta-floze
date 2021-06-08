@@ -8,7 +8,6 @@ function post_login(username) {
     console.log("the flow name is: " + flow)
 
     if (flow == "aws_sso") {
-        console.log("the flow is AWS.")
 
         const url = "{{{okta_tenant}}}/api/v1/users/" + username + "/appLinks"
 

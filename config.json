@@ -120,5 +120,26 @@
 				"requestContext": "{{{redirect_uri}}}"
 			}
 		}
+	},
+	"session_token": {
+		"desc": "Use the Okta widget to get a session token.",
+		"get_session": false,
+		"manual_login_form": true,
+		"okta_session": true,
+		"okta_tenant": "https://microdemos.oktapreview.com",
+		"onload_session_token": true,
+		"show_password": true,
+        "title": "get session token",
+		"user_msg_end": "Success! The session token is in the console.",
+		"widget_config": {
+			"baseUrl": "{{{okta_tenant}}}"
+		}
+	},
+	"get_session_with_session_token": {
+		"parent": "session_token",
+		"desc": "Use the Okta widget to get a session using a session token.",
+		"get_session": true,
+		"user_msg_end": "Success! The user now has an Okta session (details in console)."
 	}
+
 }

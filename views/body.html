@@ -59,7 +59,27 @@
 
     <div class="col-8">
         {{#widget_config}}
-        <div id="widget-container"></div>
+        <div id="widget-container" style="text-align: top;"></div>
         {{/widget_config}}
+
+        {{#manual_login_form}}
+        <div id = "login_form" style="display: none;">
+            <table border=0>
+
+                <tr>
+                    <td>username:</td>
+                    <td><input type="text" id="username_ff" value="sly.dunbar" \></td>
+                </tr>
+                <tr>
+                    <td>password:</td>
+                    <td><input type="password" id="password_ff" \></td>
+                </tr>
+            </table>
+            <br>
+            <button onclick="evaluate_creds({{get_session}})">go</button>
+        </div>    
+        {{/manual_login_form}}
     </div>
+
+
 </div>

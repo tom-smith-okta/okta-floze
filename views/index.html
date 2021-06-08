@@ -45,8 +45,16 @@
 			{{>onload_idp_disco}}
 		{{/onload_idp_disco}}
 
+		{{#onload_session_token}}
+			{{>onload_session_token}}
+		{{/onload_session_token}}
+
 		{{>post_login}}
 	{{/widget_config}}
+
+	{{#manual_login_form}}
+		{{>evaluate_creds}}
+	{{/manual_login_form}}
 
 </head>
 
